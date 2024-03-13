@@ -129,7 +129,7 @@ const demoMailList = [
         subject: 'Miss me!',
         body: 'Would love to catch up sometimes',
         isRead: false,
-        sentAt : 1551133930594,
+        sentAt : 1710351939000,
         removedAt : null,
         from: 'bobo@bobo.com',
         to: 'user@appsus.com'
