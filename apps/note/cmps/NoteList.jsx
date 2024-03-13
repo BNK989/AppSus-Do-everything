@@ -24,11 +24,11 @@ export function NoteList({note, updateUrl, setNotes, onDelete}) {
     
     return (
         <article onClick={() => updateUrl(note.id)}className={`note ${note.isPinned ? 'pinned' : ''}`} style={note.style}>
-            <button className='pin-btn' onClick={(event) =>{event.stopPropagation() ;togglePin(note.id)}}>{`${isPinned ? 'pinned' : 'Pin'}`}</button>
+            <button className='pin-btn btn' onClick={(event) =>{event.stopPropagation() ;togglePin(note.id)}}>{`${isPinned ? 'pinned' : 'Pin'}`}</button>
             <DynamicCmp cmpType={note} />
-            <div className="action-btns">
-                <button onClick={() => updateUrl(note.id)} className="edit-btn">Edit</button>
-                <button onClick={(event) =>{event.stopPropagation() ;onDelete(note.id)}} className="delete-btn">Delete</button>
+            <div className="action-btns btn">
+                <button onClick={() => updateUrl(note.id)} className="edit-btn btn">Edit</button>
+                <button onClick={(event) =>{event.stopPropagation() ;onDelete(note.id)}} className="delete-btn btn">Delete</button>
             </div>
         </article>
     )

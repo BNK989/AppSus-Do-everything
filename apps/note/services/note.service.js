@@ -8,6 +8,7 @@ const NOTE_KEY = 'noteDB'
 export const noteService = {
     query,
     remove,
+    update,
     togglePin,
     getFilterFromParams,
     getDefaultFilter,
@@ -31,6 +32,10 @@ function query() {
 function remove(id){
     return storageService.remove(NOTE_KEY,id)
 
+}
+
+function update(id, newNote){
+    return storageService.put(NOTE_KEY, newNote)
 }
 
 function togglePin(id){
