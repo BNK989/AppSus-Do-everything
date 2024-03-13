@@ -18,6 +18,8 @@ export function UserMsg() {
     })
     return unsubscribe
   }, [])
+  
+  console.log('msg')
 
   function closeMsg() {
     setMsg(null)
