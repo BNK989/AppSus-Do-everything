@@ -3,7 +3,10 @@ const { useState, useEffect, Fragment } = React;
 export function MailPreview({ email }) {
   const [isLoading, setIsLoading] = useState(true);
   const [convertedEmail, setIEmail] = useState(null);
-  //   const [subject] = email
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
+  
+  // const isSelected = selectedIds.includes(email.id);
 
   useEffect(() => {
     prepareEmailToShow()
@@ -23,13 +26,32 @@ export function MailPreview({ email }) {
     console.log(convertedEmail);
   }
 
+  function handleCheckboxChange(event) {
+    setIsChecked(!isChecked);
+    if (event.target.checked) {
+      console.log(event.target.value); // Print the value of the input if checked
+    }
+  }
+
+  // function handleCheckboxChange() {
+  //   setIsChecked(!isChecked); // Toggle the checked state
+  // }
+
   if (isLoading) return <div>Loading details..</div>;
   return (
-      <div className={`mail-preview ${(email.isRead) ? '':'bold'}`} >
-        <p className="bold">{convertedEmail.from}</p>
+      <div className={`mail-preview ${(email.isRead) ? '':'bold'} ${email.isChecked ? 'checked' : ''}`} >
+      <input
+        type="checkbox"
+        name="selected-input"
+        id={`selected-${email.id}`}
+        value={email.id}
+        onChange={handleCheckboxChange}
+        checked={isChecked}
+      />
+        <p>{convertedEmail.from}</p>
         <p>{convertedEmail.subject}</p>
-        <p>{email.body}</p>
-        <p>{email.sentAt}</p>
+        <p>{convertedEmail.body}</p>
+        <p>{convertedEmail.sentAt}</p>
 
       </div>
   )
