@@ -2,6 +2,7 @@ const { useState, useEffect } = React
 const { Link, useSearchParams } = ReactRouterDOM
 
 import {emailService} from "../services/email.service.js"
+import {MailList} from "../cmps/MailList.jsx"
 
 
 
@@ -14,24 +15,26 @@ export function MailIndex() {
 
     useEffect(()=>{
         // setSearchParams(filterBy)
+        emailService.initDev()
         loadEmails()
 
     },[])
     function loadEmails() {
         setIsLoading(true)
+
+        
         
         
         emailService.query()
         .then((emailsFromStorage) => {
             setEmails(emailsFromStorage)
             setIsLoading(false)
-            console.log(emailsFromStorage);
             })
     }
-    if (isLoading) return <div>Loading details..</div>
+    if (isLoading) return <div>Loading index..</div>
     return <div>
-        mail app
-        <pre>{JSON.stringify(emails)}</pre>
+        {/* <pre>{JSON.stringify(emails)}</pre> */}
+        <MailList emails={emails} />
         </div>
 }
 

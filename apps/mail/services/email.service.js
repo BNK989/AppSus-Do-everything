@@ -9,6 +9,12 @@ export const emailService = {
     createMail,
     getFilterFromParams,
     query,
+    initDev,
+    
+}
+function initDev(){
+    storageService._save(MAIL_KEY,demoMailList)
+
 }
 
 function query(filterBy) {
@@ -120,7 +126,7 @@ const demoMailList = [
         },
     {
         id: 'e102',
-        subject: 'Miss you!',
+        subject: 'Miss me!',
         body: 'Would love to catch up sometimes',
         isRead: false,
         sentAt : 1551133930594,
@@ -130,7 +136,7 @@ const demoMailList = [
         },
     {
         id: 'e103',
-        subject: 'Miss you!',
+        subject: 'Miss her!',
         body: 'Would love to catch up sometimes',
         isRead: false,
         sentAt : 1551133930594,
