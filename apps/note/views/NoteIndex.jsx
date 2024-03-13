@@ -23,6 +23,7 @@ export function NoteIndex() {
         <React.Fragment>
         <section>
     {/* <NoteList /> */}
+    {notes.map(note => <NoteList key={note.id} note={note} />)}
     <div>Note-filter</div>
     <div>note-maker</div>
     <div>note-list use columns</div>
