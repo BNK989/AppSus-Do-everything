@@ -5,12 +5,15 @@ import { showErrorMsg, showSuccessMsg, showUserMsg } from "../../../services/eve
 
 const NOTE_KEY = 'noteDB'
 
-const noteService = {
+export const noteService = {
     query,
+    remove,
+    togglePin,
+    getFilterFromParams,
+    getDefaultFilter,
     // MakeNewNote
 }
 
-export {noteService}
 
 //functions
 function query() {
@@ -25,6 +28,32 @@ function query() {
     })
 }
 
+function remove(id){
+    return storageService.remove(NOTE_KEY,id)
+
+}
+
+function togglePin(id){
+    return storageService.get(NOTE_KEY,id)
+    .then(note =>{
+        note.isPinned = !note.isPinned
+        storageService.put(NOTE_KEY,note)
+        return note
+    })
+}
+
+function getDefaultFilter() {
+    return { txt: '' }
+}
+
+function getFilterFromParams(searchParams = {}) {
+    const defaultFilter = getDefaultFilter()
+    return {
+        txt: searchParams.get('txt') || defaultFilter.txt,
+        // minSpeed: searchParams.get('minSpeed') || defaultFilter.minSpeed,
+        // desc: searchParams.get('desc') || defaultFilter.desc
+    }
+}
 
 class MakeNewNote {
   constructor(note) {

@@ -1,22 +1,41 @@
+const { useState } = React
+
 import { TextNote } from "../cmps/DynamicCmp/TextNote.jsx";
 import { ImgNote } from "../cmps/DynamicCmp/ImgNote.jsx";
 import { VidNote } from "../cmps/DynamicCmp/VidNote.jsx";
 
-export function NoteList({note}) {
+import { noteService } from '../services/note.service.js'
+import { showErrorMsg, showSuccessMsg, showUserMsg } from "../../../services/event-bus.service.js"
+
+export function NoteList({note, updateUrl, setNotes, onDelete}) {
+
+    const [isPinned, setIsPinned] = useState(note.isPinned)
+
+    const togglePin = (id) => {
+        console.log(id)
+        noteService.togglePin(id)
+            .then(() => setIsPinned(prev => !prev))
+            .catch((err) => console.error('Could not toggle pin', err))
+        
+    }
+
+
 
     
-    return <DynamicCmp cmpType={note} />
-    // return <article className={`note ${note.isPinned ? 'pinned': ''}`}>
-    //     {note.info.imgUrl && <img src={note.info.imgUrl} alt=""/>} 
-    //     <h3>{note.info.title}</h3>
-    //     {note.info.txt && <p>{note.info.txt}</p>}
-    //     {note.info.vidUrl && <iframe src={note.info.vidUrl} width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>}
-    //     </article>
+    return (
+        <article onClick={() => updateUrl(note.id)}className={`note ${note.isPinned ? 'pinned' : ''}`} style={note.style}>
+            <button className='pin-btn' onClick={(event) =>{event.stopPropagation() ;togglePin(note.id)}}>{`${isPinned ? 'pinned' : 'Pin'}`}</button>
+            <DynamicCmp cmpType={note} />
+            <div className="action-btns">
+                <button onClick={() => updateUrl(note.id)} className="edit-btn">Edit</button>
+                <button onClick={(event) =>{event.stopPropagation() ;onDelete(note.id)}} className="delete-btn">Delete</button>
+            </div>
+        </article>
+    )
 }
 
 
     function DynamicCmp(props)  {
-        console.log(props.cmpType)
         switch (props.cmpType.type) {
             case 'NoteTxt':
                 return <TextNote {...props.cmpType} />
