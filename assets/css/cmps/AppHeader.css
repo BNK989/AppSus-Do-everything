@@ -7,12 +7,34 @@ header {
 .app-header {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    min-height:  calc(max-content + 1em);
+    align-items: center;
+
+    nav{
+        display: flex;
+        height: max-content;
+        gap: 0.75em;
+        margin: 0 .5em;
+
+    }
+
+
 }
 
 nav a {
-    margin: .5em;
+    display: flex;
+    height: 2em;
+    margin: auto 0;
+    align-items: center;
 }
+
+.logo {
+    margin: 0 1em;
+    img{
+    max-width: 2em;
+    }
+}
+
 
 nav a:active {
     color: var(--dark-yellow);
