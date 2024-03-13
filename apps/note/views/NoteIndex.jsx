@@ -21,8 +21,9 @@ export function NoteIndex() {
     if (!notes) return <div>Loading notes...</div>
     return (
         <React.Fragment>
-        <section>
+        <section className="note-index">
     {/* <NoteList /> */}
+    {notes.map(note => <NoteList key={note.id} note={note} />)}
     <div>Note-filter</div>
     <div>note-maker</div>
     <div>note-list use columns</div>

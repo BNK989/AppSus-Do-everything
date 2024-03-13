@@ -1,1 +1,30 @@
  /* note index */
+
+section.note-index {
+    columns: 20vw;
+    margin: 1em;
+    column-gap: 1em;
+
+    
+    iframe{
+    width: 100%;
+    }
+}
+
+section.note-index > *{
+    break-inside: avoid;
+}
+
+.note {
+    padding: .5em;
+    border: 1px solid #ccc;
+    border-radius: .5em;
+    margin: .5em 0;
+    display: inline-block;
+    transition: box-shadow .4s, transform .4s;
+}
+
+.note:hover{
+    box-shadow: 0 0 4px 3px var(--base);
+    transform: scale(1.02);
+}
