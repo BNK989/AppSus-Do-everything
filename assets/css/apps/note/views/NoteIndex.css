@@ -1,1 +1,16 @@
  /* note index */
+
+section.note-index {
+    columns: 20vw;
+    margin: 1em;
+    column-gap: 1em;
+
+    
+    iframe{
+    width: 100%;
+    }
+}
+
+section.note-index > *{
+    break-inside: avoid;
+}

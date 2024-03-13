@@ -5,11 +5,18 @@ import {storageService} from "../../../services/storage.service"
 
 const MAIL_KEY = 'mailDB'
 
-export const mailService = {
+ const mailService = {
     _createMails,
+    test
 }
 
+export { mailService }
 
+window.dd = mailService
+
+function test(){
+    console.log('test')
+}
 
 console.log('dd');
 function _createMails() {
