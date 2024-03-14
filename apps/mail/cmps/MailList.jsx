@@ -16,7 +16,7 @@ export function MailList(props) {
     <div>
       <ul className="preview-list">
         {emails.map((email) => <li key={email.id}>
-            <MailPreview email={email} />
+            <MailPreview email={email} removeToTrash={props.removeToTrash}/>
           </li>
         )}
       </ul>
