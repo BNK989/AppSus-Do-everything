@@ -15,7 +15,6 @@ import { noteService } from '../services/note.service.js'
 
 export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
   if (!note) note = noteService.getEmptyNote()
-  console.log(note)
 
   const [isPinned, setIsPinned] = useState(note.isPinned)
   const [newNote, setNewNote] = useState(note.info)
@@ -27,12 +26,18 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
   useEffect(() => {
     updateFields()
     if (note.id) setIsActive(true)
+    //listToClick()
   }, [note.id])
 
   const updateFields = () => {
     setNewNote(note.info)
-    h3TitleRef.current.innerText = note.info.title
-    if (pTextRef.current) pTextRef.current.innerText = note.info.txt
+    if(!note.id){
+        h3TitleRef.current.innerText = 'Add Title'
+        pTextRef.current.innerText = 'Add Text'
+    } else {
+        h3TitleRef.current.innerText = note.info.title
+        if (pTextRef.current) pTextRef.current.innerText = note.info.txt
+    }
   }
 
   const onChangeStyle = (newStyle) => {
@@ -85,15 +90,13 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
   const onClose = (e) => {
     e.stopPropagation()
     setIsActive(false)
-    console.log('isActive', isActive)
-
     updateUrl('')
   }
 
   //console.log(newNote)
   return (
     <Fragment>
-        <div onClick={() => setIsActive(false)} className={`backdrop ${isActive ? 'active' : ''}`}></div>
+        <div onClick={(e) => {setIsActive(false);onClose(e)}} className={`backdrop ${isActive ? 'active' : ''}`}></div>
     <article
       onClick={() => setIsActive(true)}
       className={`note-edit flex ${note.isPinned ? 'pinned' : ''} ${
@@ -116,7 +119,10 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
         contentEditable
       ></h3>
       {(note.info.txt || !note.id) && (
-        <div><p ref={pTextRef} name="txt" onInput={handleChange} contentEditable={true}></p><p>test</p></div>
+        <p ref={pTextRef} name="txt" onInput={handleChange} contentEditable={true}></p>
+      )}
+      {(note.info.imgUrl) && (
+        <img name="img" src={note.info.imgUrl} />
       )}
       <div className="action-btns">
         <NoteActions

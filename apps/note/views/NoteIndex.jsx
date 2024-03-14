@@ -21,7 +21,6 @@ export function NoteIndex() {
   const params = useParams()
 
   useEffect(() => {
-    console.log('noteId:', noteId)
     noteService.query().then((data) => setNotes(data))
   }, [searchParams, noteId])
 

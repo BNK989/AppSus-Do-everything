@@ -29,16 +29,15 @@ export function ColorInput({ note, onChangeStyle }) {
   }
 
   function listToClick() {
-    // Define event listener function separately
     const handleClick = (e) => {
-        e.stopPropagation();
-        console.log(e.target);
-        setChangeColor(false);
-        window.removeEventListener('click', handleClick); // Use handleClick as the callback
-    };
+        e.stopPropagation()
+        console.log(e.target)
+        setChangeColor(false)
+        window.removeEventListener('click', handleClick)
+    }
 
     // Add event listener
-    window.addEventListener('click', handleClick);
+    window.addEventListener('click', handleClick)
 }
 
 
