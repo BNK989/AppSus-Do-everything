@@ -23,6 +23,7 @@
 @import './cmps/AppHeader.css';
 @import './cmps/mail-list.css';
 @import './cmps/mail-preview.css';
+@import './cmps/ColorInput.css';
 @import './cmps/mail-full-screen.css';
 
 /* @import './apps/mail/cmps/MailList.css'; */
