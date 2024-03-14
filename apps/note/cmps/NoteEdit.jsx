@@ -1,4 +1,4 @@
-const { useState, useRef, useEffect } = React
+const { useState, useRef, useEffect, Fragment } = React
 
 import { ColorInput } from '../cmps/ColorInput.jsx'
 import { NoteActions } from '../cmps/NoteActions.jsx'
@@ -92,9 +92,11 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
 
   //console.log(newNote)
   return (
+    <Fragment>
+        <div onClick={() => setIsActive(false)} className={`backdrop ${isActive ? 'active' : ''}`}></div>
     <article
       onClick={() => setIsActive(true)}
-      className={`note-edit ${note.isPinned ? 'pinned' : ''} ${
+      className={`note-edit flex ${note.isPinned ? 'pinned' : ''} ${
         isActive ? 'active' : ''
       }`}
       style={{ backgroundColor: note.style.backgroundColor }}
@@ -105,7 +107,7 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
           onClose(e)
         }}
       >
-        close
+        <i className="fa-solid fa-xmark"></i>
       </button>
       <h3
         ref={h3TitleRef}
@@ -113,10 +115,10 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
         onInput={handleChange}
         contentEditable
       ></h3>
-      {note.info.txt || !note.id && (
-        <p ref={pTextRef} name="txt" onInput={handleChange} contentEditable></p>
+      {(note.info.txt || !note.id) && (
+        <div><p ref={pTextRef} name="txt" onInput={handleChange} contentEditable={true}></p><p>test</p></div>
       )}
-      <div className="action-btns btn">
+      <div className="action-btns">
         <NoteActions
           note={note}
           togglePin={togglePin}
@@ -127,5 +129,6 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
         />
       </div>
     </article>
+    </Fragment>
   )
 }

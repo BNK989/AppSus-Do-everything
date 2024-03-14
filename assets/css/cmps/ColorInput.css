@@ -16,4 +16,30 @@
 
 .color-input .selected{
     border: 2px solid var(--dark-base);
+    position: relative;
+}
+
+.color-input .selected::after{
+    font-family: fa-solid;
+    content: '\f00c';
+    background-color: var(--dark-base);
+    color: whitesmoke;
+    padding: .5em;
+    border-radius: 50%;
+    font-size: .5em;
+    position: absolute;
+    top: -8px;
+    right: -7px;
+
+}
+
+.color-input{
+    position: absolute;
+    bottom: -40px;
+    width: 100%;
+    background-color: hsla(0, 0%, 100%, 0.95);
+    padding: 0.5em;
+    border-radius: 20em;
+    border: 1px solid;
+    z-index: 2;
 }

@@ -1,0 +1,41 @@
+@font-face {
+    font-family: fa-brands;
+    src: url(../../fonts/fa/fa-brands.ttf);
+  }
+
+  @font-face {
+    font-family: fa-compatibility;
+    src: url(../../fonts/fa/fa-compatibility.ttf);
+  }
+
+  @font-face {
+    font-family: fa-reg;
+    src: url(../../fonts/fa/fa-regular.ttf);
+  }
+
+  @font-face {
+    font-family: fa-solid;
+    src: url(../../fonts/fa/fa-solid.ttf);
+  }
+
+  
+.fa {
+    font-family: fa-reg;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .fa.facebook::after {
+    content: '\f39e';
+  }
+  .fa.twitter::after {
+    content: '\f099';
+  }
+  .fa.dribble::after {
+    content: '\f17d';
+  }
+  .fa.behance::after {
+    content: '\f1b4';
+  }

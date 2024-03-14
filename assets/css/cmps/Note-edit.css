@@ -1,4 +1,10 @@
 .note-edit {
+  position: relative;
+  min-height: 10em;
+
+  flex-direction: column;
+  justify-content: space-around;
+
   padding: 0.5em;
   border: 1px solid #ccc;
   border-radius: 0.5em;
@@ -18,5 +24,24 @@
   transform: translate(-50%, -50%);
   min-width: 40vw;
   min-height: 40vh;
-  z-index: 4;
+  z-index: 3;
 }
+
+.backdrop.active{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--base);
+    opacity: 0.5;
+    z-index: 3;
+    top: 0;
+    left: 0;
+}
+
+.remove-btn{
+    position: absolute;
+    right: -5px;
+    top: -5px;
+}
+
+

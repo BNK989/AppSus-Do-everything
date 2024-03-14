@@ -28,5 +28,56 @@
 
 .bold{
     font-weight: bold;
+}
 
+.btn {
+    background-color: transparent;
+    color: var(--base);
+    border: none;
+    padding: .5em 1em;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+/* 
+    &:hover {
+        background-color: var(--dark-base);
+        color: var(--light-base);
+    } */
+/* 
+    &:active {
+        background-color: var(--darker-base);
+        color: var(--dark-base);
+    } */
+
+}
+.btn:hover {
+    background-color: var(--dark-base);
+    color: var(--light-base);
+}
+
+.btn:active {
+    background-color: var(--darker-base);
+    color: var(--dark-base);
+}
+
+.action-btns{
+    z-index: 999;
+    
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap:.5em;
+
+}
+
+.pin-btn{
+    display: none;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    background-color: transparent;
+}
+
+.note:hover .pin-btn {
+    display: block;
 }

@@ -16,15 +16,22 @@ section.note-index > *{
 }
 
 .note {
+    position: relative;
+    width: 100%;
+    margin: .5em 0;
     padding: .5em;
+
     border: 1px solid #ccc;
     border-radius: .5em;
-    margin: .5em 0;
     display: inline-block;
     transition: box-shadow .4s, transform .4s;
+
+    h3{
+        margin-inline: 1em
+    }
 }
 
 .note:hover{
     box-shadow: 0 0 4px 3px var(--base);
-    transform: scale(1.02);
+    /* transform: scale(1.02); */
 }
