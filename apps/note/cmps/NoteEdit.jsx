@@ -47,7 +47,7 @@ export function NoteEdit({note, updateUrl, onDelete}) {
         
     }
     
-    console.log(newNote)
+    //console.log(newNote)
     return (
         <article className={`note ${note.isPinned ? 'pinned' : ''}`} style={note.style}>
             <button className='pin-btn btn' onClick={() => togglePin(note.id)}>{`${isPinned ? 'pinned' : 'Pin'}`}</button>

@@ -9,9 +9,11 @@ export const noteService = {
     query,
     remove,
     update,
+    post,
     togglePin,
     getFilterFromParams,
     getDefaultFilter,
+    getBaseNote,
     // MakeNewNote
 }
 
@@ -36,6 +38,10 @@ function remove(id){
 
 function update(id, newNote){
     return storageService.put(NOTE_KEY, newNote)
+}
+
+function post(newNote){
+    return storageService.post(NOTE_KEY, newNote)
 }
 
 function togglePin(id){
@@ -80,6 +86,17 @@ class MakeNewNote {
         throw new Error('not supported type')
     }
   }
+}
+
+
+function getBaseNote(){
+    return {
+        createdAt: Date.now(),
+        type: 'NoteTxt',
+        isPinned: false,
+        style: { backgroundColor: '#fff' },
+        info: { title: '', txt: '' },
+    }
 }
 
 //DemoData

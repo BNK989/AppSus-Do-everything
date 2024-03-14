@@ -5,6 +5,7 @@ const { Link, useSearchParams } = ReactRouterDOM
 
 import { NoteList } from '../cmps/NoteList.jsx'
 import { NoteEdit } from '../cmps/NoteEdit.jsx'
+import { AddNewNote } from "../cmps/AddNewNote.jsx";
 
 import { noteService  } from '../services/note.service.js'
 import { showErrorMsg, showSuccessMsg, showUserMsg } from "../../../services/event-bus.service.js"
@@ -47,6 +48,7 @@ export function NoteIndex() {
     if (!notes) return <div>Loading notes...</div>
     return (
         <React.Fragment>
+            <AddNewNote setNotes={setNotes}/>
             {noteId && <NoteEdit note={notes.find(note => note.id === noteId)} updateUrl={updateUrl} onDelete={onDelete}/>}
         <section className="note-index">
 
