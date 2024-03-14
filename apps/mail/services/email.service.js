@@ -20,17 +20,22 @@ function query(filterBy) {
   console.log("filterBy", filterBy);
 
   return storageService.query(MAIL_KEY).then((emails) => {
-    if (filterBy) {
-      if (filterBy.subject) {
-        const regex = new RegExp(filterBy.subject, "i");
-        emails = emails.filter((email) => regex.test(email.subject));
-      }
-      if (filterBy.sentAt) {
-        emails = emails.filter((email) => email.sentAt >= filterBy.sentAt);
-      }
-    }
-    return emails;
-  });
+    if(filterBy==='inbox')return emails.filter((email)=>email.folder === filterBy)
+    if(filterBy=== 'starred')return emails.filter((email)=>email.isStared === true)
+    else return emails   
+    
+    })
+    // if (filterBy) {
+    //   if (filterBy.subject) {
+    //     const regex = new RegExp(filterBy.subject, "i");
+    //     emails = emails.filter((email) => regex.test(email.subject));
+    //   }
+    //   if (filterBy.sentAt) {
+    //     emails = emails.filter((email) => email.sentAt >= filterBy.sentAt);
+    //   }
+    // }
+    // return emails;
+  
 }
 
 function _createMails() {
@@ -41,8 +46,6 @@ function _createMails() {
     demoMailList.forEach((mail) => {
       mails.push(mail);
     });
-
-    // storageService.saveToStorage(MAIL_KEY, mails) // change to right path
   }
 }
 
@@ -112,6 +115,8 @@ const demoMailList = [
     removedAt: null,
     from: "momo@momo.com",
     to: "user@appsus.com",
+    folder:'inbox',
+    isStared: true
   },
   {
     id: "e102",
@@ -123,6 +128,8 @@ const demoMailList = [
     removedAt: null,
     from: "bobo@bobo.com",
     to: "user@appsus.com",
+    folder:'inbox',
+    isStared: false,
   },
   {
     id: "e103",
@@ -134,6 +141,8 @@ const demoMailList = [
     removedAt: null,
     from: "dodo@dodo.com",
     to: "user@appsus.com",
+    folder:'inbox',
+    isStared: true,
   },
   {
     id: "e104",
@@ -145,5 +154,33 @@ const demoMailList = [
     removedAt: null,
     from: "tal@dodo.com",
     to: "user@appsus.com",
+    folder:'inbox',
+    isStared: false,
+  },
+  {
+    id: "e105",
+    subject: "Help!",
+    body: "Would love to catch up sometimes",
+    isRead: false,
+    isChecked: false,
+    sentAt: 1551133930594,
+    removedAt: null,
+    from: "tal@dodo.com",
+    to: "user@appsus.com",
+    folder:'inbox',
+    isStared: false,
+  },
+  {
+    id: "e106",
+    subject: "don't replay!",
+    body: "Would love to catch up sometimes",
+    isRead: false,
+    isChecked: false,
+    sentAt: 1551133930594,
+    removedAt: null,
+    from: "tal@dodo.com",
+    to: "user@appsus.com",
+    folder:'inbox',
+    isStared: false,
   },
 ];

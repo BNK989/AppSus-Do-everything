@@ -4,10 +4,7 @@ const { Link } = ReactRouterDOM
 export function MailPreview({ email }) {
   const [isLoading, setIsLoading] = useState(true);
   const [convertedEmail, setIEmail] = useState(null);
-  const [selectedIds, setSelectedIds] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
-
-  // const isSelected = selectedIds.includes(email.id);
 
   useEffect(() => {
     prepareEmailToShow();
@@ -32,8 +29,10 @@ export function MailPreview({ email }) {
   }
 
   if (isLoading) return <div>Loading details..</div>;
-  return (
-    <Link to={`/mail/inbox/full-screen/${email.id}`}>
+  return (<Fragment>
+    
+  
+    <Link to={`/mail/inbox/detail/${email.id}`}>
       <div
         className={`mail-preview ${email.isRead ? "" : "bold"} ${
           email.isChecked ? "checked" : ""
@@ -61,6 +60,7 @@ export function MailPreview({ email }) {
         </section>
       </div>
     </Link>
+    </Fragment>
   );
 }
 // id: 'e101',
