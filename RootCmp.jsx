@@ -7,7 +7,7 @@ import { Home } from "./views/Home.jsx";
 import { MailIndex } from "./apps/mail/views/MailIndex.jsx";
 import { NoteIndex } from "./apps/note/views/NoteIndex.jsx";
 
-import { MailFullScreen } from "./apps/mail/cmps/MailFullScreen.jsx";
+import { MailDetails } from "./apps/mail/cmps/MailDetails.jsx";
 import { UserMsg } from "cmps/UserMsg.jsx";
 
 export function App() {
@@ -18,13 +18,20 @@ export function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/mail" element={<MailIndex />} />
-
-          <Route path="/mail/inbox/full-screen/:id" element={<MailFullScreen />} />
+          {/* <Route path='/mail/:folder' element={<MailIndex />}/> */}
+          <Route path="/mail/:folder" element={<MailIndex />} />
+          <Route path="/mail/inbox/detail/:id" element={<MailDetails />} />
           <Route path="/note" element={<NoteIndex />} />
         </Routes>
       </section>
       <UserMsg />
     </Router>
   );
+}
+
+{
+  /* <Route
+  path='/mail/:folder/:mailId'
+  element={<MailDetails />}
+/> */
 }

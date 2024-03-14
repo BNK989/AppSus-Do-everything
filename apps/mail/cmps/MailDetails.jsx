@@ -5,7 +5,7 @@ import { utilService } from "../../../services/util.service.js";
 
 import { emailService } from "../services/email.service.js";
 
-export function MailFullScreen() {
+export function MailDetails() {
   const [isLoading, setIsLoading] = useState(true);
   const [email, setEmail] = useState(null);
 
@@ -22,7 +22,7 @@ export function MailFullScreen() {
   }, []);
   if (isLoading && !email) return <div>Loading email..</div>;
   return (
-    <div className="mail-full-screen">
+    <div className="mail-details">
       <h1>{email.subject}</h1>
       <h1>{email.body}</h1>
       <h1>{email.sentAt}</h1>
