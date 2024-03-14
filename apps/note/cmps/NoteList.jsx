@@ -4,36 +4,37 @@ import { TextNote } from "../cmps/DynamicCmp/TextNote.jsx";
 import { ImgNote } from "../cmps/DynamicCmp/ImgNote.jsx";
 import { VidNote } from "../cmps/DynamicCmp/VidNote.jsx";
 
+import { NoteActions } from "./NoteActions.jsx";
 import { noteService } from '../services/note.service.js'
 import { showErrorMsg, showSuccessMsg, showUserMsg } from "../../../services/event-bus.service.js"
 
-export function NoteList({note, updateUrl, setNotes, onDelete}) {
+export function NoteList({note, updateUrl, setNotes, onDelete, togglePin}) {
 
     const [isPinned, setIsPinned] = useState(note.isPinned)
+    const [bgColor, setBgColor] = useState(note.style.backgroundColor)
 
-    const togglePin = (id) => {
-        console.log(id)
-        noteService.togglePin(id)
-            .then(() => setIsPinned(prev => !prev))
-            .catch((err) => console.error('Could not toggle pin', err))
-        
+    const onChangeStyle = (newStyle) => {
+        note.style = newStyle
+        console.log(note.style)
+
+        noteService.update(note.id, note)
+            .then(showSuccessMsg('Note color updated'))
+            .then(setBgColor(note.style.backgroundColor))
+            .catch((err) => {
+                console.error('Could not update note', err)
+                showErrorMsg('Failed to update note')
+            })
+
     }
-
-
 
     
     return (
-        <article onClick={() => updateUrl(note.id)}className={`note ${note.isPinned ? 'pinned' : ''}`} style={note.style}>
-            <button className='pin-btn btn' onClick={(event) =>{event.stopPropagation() ;togglePin(note.id)}}>{`${isPinned ? 'pinned' : 'Pin'}`}</button>
+        <article onClick={() => updateUrl(note.id)}className={`note ${isPinned ? 'pinned' : ''}`} style={{backgroundColor: bgColor}}>
             <DynamicCmp cmpType={note} />
-            <div className="action-btns btn">
-                <button onClick={() => updateUrl(note.id)} className="edit-btn btn">Edit</button>
-                <button onClick={(event) =>{event.stopPropagation() ;onDelete(note.id)}} className="delete-btn btn">Delete</button>
-            </div>
+            <NoteActions note={note} updateUrl={updateUrl} onDelete={onDelete} onChangeStyle={onChangeStyle} togglePin={togglePin}/>
         </article>
     )
 }
-
 
     function DynamicCmp(props)  {
         switch (props.cmpType.type) {
@@ -46,3 +47,4 @@ export function NoteList({note, updateUrl, setNotes, onDelete}) {
 
         }
 }
+

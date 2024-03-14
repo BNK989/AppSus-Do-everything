@@ -43,19 +43,35 @@ export function NoteIndex() {
             })
     }
 
+    const onChangeStyle = (id, newStyle) => {
+        const note = notes.find(note => note.id === id)
+        console.log(note)
+        note.style = newStyle
 
+        noteService.update(note.id, note)
+            .then(showSuccessMsg('Note color updated'))
+            .then(setBgColor(newStyle.backgroundColor))
+            .catch((err) => {
+                console.error('Could not update note', err)
+                showErrorMsg('Failed to update note')
+            })
+
+    }
+
+    const togglePin = (id) => {
+        return noteService.togglePin(id)
+            .catch((err) => console.error('Could not toggle pin', err))
+    }
 
     if (!notes) return <div>Loading notes...</div>
     return (
         <React.Fragment>
-            <AddNewNote setNotes={setNotes}/>
-            {noteId && <NoteEdit note={notes.find(note => note.id === noteId)} updateUrl={updateUrl} onDelete={onDelete}/>}
+            {!noteId &&<AddNewNote setNotes={setNotes}/>}
+             <NoteEdit note={notes.find(note => note.id === noteId)} updateUrl={updateUrl} onDelete={onDelete} onChangeStyle={onChangeStyle} togglePin={togglePin}/>
         <section className="note-index">
 
-    {notes.map(note => <NoteList key={note.id} note={note} updateUrl={updateUrl} setNotes={setNotes} onDelete={onDelete}/>)}
+    {notes.map(note => <NoteList key={note.id} note={note} updateUrl={updateUrl} setNotes={setNotes} onDelete={onDelete} togglePin={togglePin}/>)}
     <div>Note-filter</div>
-    <div>note-maker</div>
-    <div>note-list use columns</div>
     </section>
     </React.Fragment>
     )
