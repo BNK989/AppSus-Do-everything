@@ -28,7 +28,7 @@ function query() {
     if (!notes || !notes.length) {
       notes = demoNotesV2
       console.log('creating demo notes')
-      showSuccessMsg('Creating demo notes')
+      //showSuccessMsg('Creating demo notes')
     }
     return notes
   })
