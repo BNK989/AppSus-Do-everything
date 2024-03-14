@@ -10,7 +10,7 @@
         display: block;
     }
     .app-header nav {
-        position: absolute;
+        position: fixed;
         width: 50vw;
         margin: 0;
         z-index: 2;
