@@ -14,7 +14,7 @@ export function MailList(props) {
   if (isLoading) return <div>Loading details..</div>;
   return (
     <div>
-      <ul>
+      <ul className="preview-list">
         {emails.map((email) => <li key={email.id}>
             <MailPreview email={email} />
           </li>

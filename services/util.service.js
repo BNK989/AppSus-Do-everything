@@ -6,6 +6,7 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    formatTime,
 }
 
 function makeId(length = 6) {
@@ -58,4 +59,30 @@ function getMonthName(date) {
         "July", "August", "September", "October", "November", "December"
     ]
     return monthNames[date.getMonth()]
+}
+
+
+
+
+function formatTime(timestamp) {
+    const currentDate = new Date();
+    const inputDate = new Date(timestamp);
+
+    // Check if the input date is today
+    if (inputDate.toDateString() === currentDate.toDateString()) {
+        const hours = inputDate.getHours().toString().padStart(2, '0');
+        const minutes = inputDate.getMinutes().toString().padStart(2, '0');
+        return `${hours}:${minutes}`;
+    }
+
+    // Check if the input date is yesterday
+    const yesterday = new Date(currentDate);
+    yesterday.setDate(yesterday.getDate() - 1);
+    if (inputDate.toDateString() === yesterday.toDateString()) {
+        return 'Yesterday';
+    }
+
+    // Format the input date as "dd Month" (e.g., "12 March")
+    const options = { day: '2-digit', month: 'long' };
+    return inputDate.toLocaleDateString('en-US', options);
 }
