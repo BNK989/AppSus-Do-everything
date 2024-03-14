@@ -28,6 +28,7 @@ function query() {
     if (!notes || !notes.length) {
       notes = demoNotesV2
       console.log('creating demo notes')
+      storageService._save(NOTE_KEY, notes)
       //showSuccessMsg('Creating demo notes')
     }
     return notes
