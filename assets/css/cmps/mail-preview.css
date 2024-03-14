@@ -1,6 +1,6 @@
 .mail-preview{
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(6,1fr);
 
     background-color: var(--light-base);
 }
@@ -9,5 +9,41 @@
     box-shadow: -1px -2px 17px -2px var(--base);
 -webkit-box-shadow: -1px -2px 17px -2px var(--base);
 -moz-box-shadow: -1px -2px 17px -2px var(--base);
+cursor: pointer;
 
+}
+.tags{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+}
+.action-btn{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: var(--base);
+}
+.action-btn >*:hover{
+    color: var(--dark-base);
+    font-size: 1.3em;
+
+}
+.star {
+    visibility:hidden;
+    font-size:25px;
+    cursor:pointer;
+}
+.star:before {
+   content: "\2606";
+   position: absolute;
+   translate: 0% -30%;
+   visibility:visible;
+}
+.star:checked:before {
+    content: "\2605";
+    color: gold; 
+    position: absolute;
+    translate: 0% -30%;
 }
