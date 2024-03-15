@@ -4,6 +4,7 @@
 .color-input .item{
     width: 1.5em;
     height: 1.5em;
+    margin: 0 .35em;
     border-radius: 50%;
     cursor: pointer;
 
@@ -36,10 +37,17 @@
 .color-input{
     position: absolute;
     bottom: -40px;
-    width: 100%;
     background-color: hsla(0, 0%, 100%, 0.95);
     padding: 0.5em;
     border-radius: 20em;
-    border: 1px solid;
+    border: .5px solid var(--base);
     z-index: 2;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302), 0 2px 6px 2px rgba(60,64,67,0.149);
+
+    /* this will make sure the element is not going of the end of the screen */
+    max-width: calc(100vw - 2em); /* max width is 100vw minus the distance between the element and the sides of the screen */
+    width: max-content; /* this is the actual width of the element */
+
+    /* this is to make sure the element is not going of the beginning of the screen */
+    left: max(1em, 50% - (max-width / 2));
 }

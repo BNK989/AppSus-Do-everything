@@ -18,6 +18,7 @@ export function ColorInput({ note, onChangeStyle }) {
   ]
 
   const [changeColor, setChangeColor] = useState(false)
+  const [left, setLeft] = useState(0)
 
 //   useEffect(() => {
 //     listToClick()
@@ -40,14 +41,15 @@ export function ColorInput({ note, onChangeStyle }) {
     window.addEventListener('click', handleClick)
 }
 
-
-
   return (
     <React.Fragment>
       <button
         onClick={(e) => {
           e.stopPropagation()
           setChangeColor((prev) => !prev)
+          if (window.innerWidth < 768) {
+            setLeft(e.clientX)
+          }
           listToClick()
         }}
         className="change-color-btn btn"
@@ -55,7 +57,9 @@ export function ColorInput({ note, onChangeStyle }) {
         <i className="fa-solid fa-palette"></i>
       </button>
       {changeColor && (
-        <section className="color-input flex space-around">
+        <section className="color-input flex space-around"
+          style={{left: `${left > 360 ? -180 : 0}px`}}
+          >
           {colors.map((color) => (
             <div
               key={color.shade}

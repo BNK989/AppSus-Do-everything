@@ -34,7 +34,9 @@ export function NoteList({note, updateUrl, setNotes, onDelete, togglePin}) {
 
     
     return (
-        <article onClick={() => updateUrl(note.id)}className={`note ${isPinned ? 'pinned' : ''} ${noteId === note.id ? 'active' : ''}`} style={{backgroundColor: bgColor}}>
+        <article 
+        onClick={() => updateUrl(note.id)}className={`note ${isPinned ? 'pinned' : ''} ${noteId === note.id ? 'active' : ''}`}
+        style={{backgroundColor: bgColor}}>
             <DynamicCmp cmpType={note} />
             <NoteActions note={note} updateUrl={updateUrl} onDelete={onDelete} onChangeStyle={onChangeStyle} togglePin={togglePin}/>
         </article>
