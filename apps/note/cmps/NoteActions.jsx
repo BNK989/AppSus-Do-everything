@@ -1,4 +1,6 @@
 //RCS
+import { eventBusService } from "../../../services/event-bus.service.js"
+
 const { useState } = React
 
 import { ColorInput } from "./ColorInput.jsx";
@@ -11,9 +13,10 @@ export function NoteActions({note, togglePin, updateUrl, onDelete, onChangeStyle
     const onPin = (id) => {
         togglePin(id)
         .then(() => {
-            console.log('pin function:', id)
             setIsPinned(prev => !prev)
+            //eventBusService.emit('pin-update', id)
         })
+        .then(eventBusService.emit('pin-update', id))
     }
 
     return (

@@ -49,7 +49,6 @@ export function NoteList({note, updateUrl, setNotes, onDelete, togglePin}) {
                 return <ImgNote {...props.cmpType} />
             case 'NoteVid':
                 return <VidNote {...props.cmpType} />
-
         }
 }
 

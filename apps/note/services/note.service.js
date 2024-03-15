@@ -11,6 +11,8 @@ const NOTE_KEY = 'noteDB'
 
 export const noteService = {
   query,
+  getNoteById,
+  splitByPin,
   remove,
   update,
   post,
@@ -33,6 +35,17 @@ function query() {
     }
     return notes
   })
+}
+
+function getNoteById(id) {
+  const foundNote = notes.flat().find((note) => note.id === id)
+  return foundNote || null
+}
+
+function splitByPin(notes){
+  const pinnedNotes = notes.filter(note => note.isPinned)
+  const otherNotes = notes.filter(note => !note.isPinned)
+  return [pinnedNotes, otherNotes]
 }
 
 function remove(id) {

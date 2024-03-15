@@ -9,9 +9,9 @@ import { AddNewNote } from '../cmps/AddNewNote.jsx'
 
 import { noteService } from '../services/note.service.js'
 import {
+  eventBusService,
   showErrorMsg,
   showSuccessMsg,
-  showUserMsg,
 } from '../../../services/event-bus.service.js'
 export function NoteIndex() {
   //get Notes
@@ -21,8 +21,23 @@ export function NoteIndex() {
   const params = useParams()
 
   useEffect(() => {
-    noteService.query().then((data) => setNotes(data))
+    const unsubscribe = eventBusService.on('pin-update', changedNoteId => {
+      setTimeout(updateNotes, 999)
+    })
+    return unsubscribe
+  },[])
+
+  useEffect(() => {
+    updateNotes()
   }, [searchParams, noteId])
+
+  const updateNotes = () => {
+    noteService.query()
+    .then((data) => { 
+      return noteService.splitByPin(data)
+    })
+    .then((data) => setNotes(data))
+  }
 
   const updateUrl = (noteId) => {
     setSearchParams({ id: noteId })
@@ -48,8 +63,7 @@ export function NoteIndex() {
   }
 
   const onChangeStyle = (id, newStyle) => {
-    const note = notes.find((note) => note.id === id)
-    console.log(note)
+    const note = noteService.getNoteById(id)
     note.style = newStyle
 
     noteService
@@ -68,19 +82,37 @@ export function NoteIndex() {
       .catch((err) => console.error('Could not toggle pin', err))
   }
 
+  const getNoteById = (id) => {
+    const foundNote = notes.flat().find((note) => note.id === id)
+    return foundNote || null
+  }
+
   if (!notes) return <div>Loading notes...</div>
   return (
     <React.Fragment>
       {/* {!noteId &&<AddNewNote setNotes={setNotes}/>} */}
       <NoteEdit
-        note={notes.find((note) => note.id === noteId)}
+        note={ getNoteById(noteId)}
         updateUrl={updateUrl}
         onDelete={onDelete}
         onChangeStyle={onChangeStyle}
         togglePin={togglePin}
       />
-      <section className="note-index">
-        {notes.map((note) => (
+        <h3>Pinned</h3>
+      <section className="note-index pinned">
+        {notes[0].map((note) => (
+          <NoteList
+            key={note.id}
+            note={note}
+            updateUrl={updateUrl}
+            setNotes={setNotes}
+            onDelete={onDelete}
+            togglePin={togglePin}
+          />
+        ))}
+        </section>
+        <section className="note-index unpinned">
+        {notes[1].map((note) => (
           <NoteList
             key={note.id}
             note={note}

@@ -29,15 +29,22 @@ export function showErrorMsg(txt) {
     showUserMsg({ txt, type: 'error' })
 }
 
+export function test(log){
+    eventBusService.emit('muk', log)
+}
+
 
 
 
 
 
 // Service Testing:
-// eventBus.on('muk', (data)=>{
-//     console.log('Got Muk with data:', data)
-// })
+//window.ebs = eventBusService
+eventBusService.on('muk', (data)=>{
+    console.log('Got Muk with data:', data)
+})
+
+eventBusService.emit('muk', 'Buuuu!')
 // eventBus.on('muk', console.log)
 // eventBus.on('puk', (level)=>{
 //     console.log('Got puk with level:', level)
