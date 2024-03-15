@@ -84,3 +84,6 @@
 .note:hover .pin-btn {
   display: block;
 }
+.inline{
+  display: inline;
+}

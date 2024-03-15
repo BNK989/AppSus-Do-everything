@@ -2,7 +2,9 @@
     display: grid;
     grid-template-columns: 10% auto 20%;
 
-    background-color: var(--light-base);
+    background-color: white;
+    border-top-color: 2px solid black;
+    border-bottom: 1px solid lightgrey;
 }
 .mail-preview:hover{
     /* background-color: var(--base); */
@@ -14,7 +16,6 @@ cursor: pointer;
 }
 .email-preview-body{
     display: inline-flex;
-    gap:10px;
 }
 .tags{
     display: grid;
