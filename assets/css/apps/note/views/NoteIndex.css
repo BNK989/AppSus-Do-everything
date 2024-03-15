@@ -1,47 +1,45 @@
- /* note index */
+/* note index */
 
-section.note-app{
-    display: grid;
-    grid-template-columns: 80px 1fr 80px;
+section.note-app {
+  display: grid;
+  grid-template-columns: minmax(0,80px) minmax(400px,1fr) minmax(0,80px);
 }
 
-section.note-app > *{
-    grid-column: 2;
+section.note-app > * {
+  grid-column: 2;
 }
-
 
 section.note-index {
-    columns: 20vw 4;
-    margin: 1em;
-    column-gap: 1em;
+  columns: 20vw 4;
+  margin: .1em;
+  column-gap: 1em;
 
-    
-    iframe{
+  iframe {
     width: 100%;
-    }
+  }
 }
 
-section.note-index > *{
-    break-inside: avoid;
+section.note-index > * {
+  break-inside: avoid;
 }
 
 .note {
-    position: relative;
-    width: 100%;
-    margin: .5em 0;
-    padding: .5em;
+  position: relative;
+  width: 100%;
+  margin: 0.5em 0;
+  padding: 0.5em;
 
-    border: 1px solid #ccc;
-    border-radius: .5em;
-    display: inline-block;
-    transition: box-shadow .4s, transform .4s;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  display: inline-block;
+  transition: box-shadow 0.4s, transform 0.4s;
 
-    h3{
-        margin-inline: 1em
-    }
+  h3 {
+    margin-inline: 1em;
+  }
 }
 
-.note:hover{
-    box-shadow: 0 0 4px 3px var(--base);
-    /* transform: scale(1.02); */
+.note:hover {
+  box-shadow: 0 0 4px 3px var(--base);
+  /* transform: scale(1.02); */
 }
