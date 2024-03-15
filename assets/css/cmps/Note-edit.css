@@ -1,19 +1,37 @@
 .note-edit {
   position: relative;
-  min-height: 10em;
+  width: clamp(200px, 80%, 600px);
+  place-self: center;
 
-  flex-direction: column;
-  justify-content: space-around;
-
+  align-items: center;
+  justify-content: space-between;
+  
+  font-size: .9em;
+  
   padding: 0.5em;
   border: 1px solid #ccc;
   border-radius: 0.5em;
   margin: 1em;
+  box-shadow: 0 0 6px 1px #00000042;
   transition: box-shadow 0.4s, transform 0.4s;
 
-  p{
+  .action-btns,
+  .remove-btn {
+    display: none;
+  }
+  h3{
+    color: #757575;
+    padding: .2em .5em;
     flex-grow: 1;
   }
+  p{
+    display: none;
+  }
+}
+
+.create-note-type{
+  font-size: 1.1em;
+  gap: .2em
 }
 
 .note-edit:hover {
@@ -23,29 +41,46 @@
 
 .note-edit.active {
   position: fixed;
+  flex-direction: column; 
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 40vw;
   min-height: 40vh;
   z-index: 3;
+
+  h3{
+    min-width: 90%;
+    flex: 0
+  }
+  p,
+  .action-btns,
+  .remove-btn {
+    display: block;
+  } 
+  p{
+    flex-grow: 1;
+    display: block;
+    min-width: 90%;
+  }
+  .create-note-type{
+    display: none;
+  }
 }
 
-.backdrop.active{
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--base);
-    opacity: 0.5;
-    z-index: 3;
-    top: 0;
-    left: 0;
+.backdrop.active {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--base);
+  opacity: 0.5;
+  z-index: 3;
+  top: 0;
+  left: 0;
 }
 
-.remove-btn{
-    position: absolute;
-    right: -5px;
-    top: -5px;
+.remove-btn {
+  position: absolute;
+  right: -5px;
+  top: -5px;
 }
-
-

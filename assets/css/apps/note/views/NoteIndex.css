@@ -1,5 +1,15 @@
  /* note index */
 
+section.note-app{
+    display: grid;
+    grid-template-columns: 80px 1fr 80px;
+}
+
+section.note-app > *{
+    grid-column: 2;
+}
+
+
 section.note-index {
     columns: 20vw 4;
     margin: 1em;

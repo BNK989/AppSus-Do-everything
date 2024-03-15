@@ -26,7 +26,16 @@
     align-items: center;
     justify-content: center;
   }
-  
+
+  .fa-check-box::before{
+    content: '\f14a';
+  }
+  .fa-paintbrush::before {
+    content: '\f1fc';
+  }
+  .fa-image::before {
+    content: '\f1c5';
+  }
   .fa.facebook::after {
     content: '\f39e';
   }

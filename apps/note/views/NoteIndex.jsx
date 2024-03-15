@@ -96,7 +96,7 @@ export function NoteIndex() {
 
   if (!notes) return <div>Loading notes...</div>
   return (
-    <React.Fragment>
+    <section className="note-app">
       <NoteFilter filterBy={filterBy} onSetFilter={onSetFilter}/>
       <NoteEdit
         note={ getNoteById(noteId)}
@@ -131,6 +131,6 @@ export function NoteIndex() {
         ))}
         <div>Note-filter</div>
       </section>
-    </React.Fragment>
+    </section>
   )
 }

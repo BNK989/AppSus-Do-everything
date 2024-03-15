@@ -32,8 +32,8 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
   const updateFields = () => {
     setNewNote(note.info)
     if(!note.id){
-        h3TitleRef.current.innerText = 'Add Title'
-        pTextRef.current.innerText = 'Add Text'
+        h3TitleRef.current.innerText = 'Take a note...'
+        pTextRef.current.innerText = ''
     } else {
         h3TitleRef.current.innerText = note.info.title
         if (pTextRef.current) pTextRef.current.innerText = note.info.txt
@@ -118,6 +118,11 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
         onInput={handleChange}
         contentEditable
       ></h3>
+      <div className="create-note-type flex">
+        <button onClick={()=>console.log('in dev')} className="btn create-note-type fa fa-check-box"></button>
+        <button onClick={()=>console.log('in dev')} className="btn create-note-type fa fa-paintbrush"></button>
+        <button onClick={()=>console.log('in dev')} className="btn create-note-type fa fa-image"></button>
+      </div>
       {(note.info.txt || !note.id) && (
         <p ref={pTextRef} name="txt" onInput={handleChange} contentEditable={true}></p>
       )}
