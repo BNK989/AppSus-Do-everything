@@ -1,5 +1,5 @@
 const { useState, useEffect,Fragment } = React
-const { Link, useSearchParams } = ReactRouterDOM
+const { Link, useSearchParams,Outlet } = ReactRouterDOM
 const { useParams } = ReactRouter;
 
 import {emailService} from "../services/email.service.js"
@@ -15,6 +15,8 @@ import {MailSideBar} from "../cmps/MailSideBar.jsx"
 export function MailIndex() {
     const [emails, setEmails ]=useState(null)
     const [isLoading, setIsLoading] = useState(true)
+    const [currFilter, setCurrFilter] = useState('inbox')
+
     const params = useParams();
     // const [searchParams, setSearchParams] = useSearchParams(null)
     // const [filterBy, setFilterBy] = useState(emailService.getFilterFromParams(searchParams))
@@ -27,6 +29,12 @@ export function MailIndex() {
         loadEmails(filter)
 
     },[params])
+
+    useEffect(()=>{
+        console.log(currFilter);
+    },[currFilter])
+
+
     function loadEmails(filter) {
         setIsLoading(true)
 
@@ -36,21 +44,20 @@ export function MailIndex() {
             setIsLoading(false)
             setEmails(emailsFromStorage)
             })
-            // .then((emailsFromStorage)=>{
-                // console.log(emailsFromStorage);
-            // })
-            // .then(()=>setIsLoading(false))
+ 
     }
-
-
-
-
-
-
+    function removeToTrash(id,folder){
+        // console.log(id);
+        // console.log(folder);
+        var filteredList = emailService.removeToFolder(id,folder)
+        setEmails(filteredList)
+      }
     if (isLoading) return <div>Loading index..</div>
     return <div className="main-container">
-        <MailSideBar/>
-        <MailList emails={emails} />
+        <MailSideBar setCurrFilter={setCurrFilter}/>
+        
+        {params.id&&<Outlet/>}
+        {!params.id&&<MailList emails={emails} removeToTrash={removeToTrash}/>}
         </div>
 }
 

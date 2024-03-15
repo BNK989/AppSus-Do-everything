@@ -4,14 +4,14 @@ const { useParams, } = ReactRouter;
 
 
 
-export function MailSideBar() {
+export function MailSideBar({setCurrFilter}) {
     const [isLoading, setIsLoading] = useState(true)
     const params = useParams();
 
     useEffect(()=>{
         setIsLoading(false)
 
-    },[params])
+    },[])
 
 
 
@@ -22,10 +22,10 @@ export function MailSideBar() {
     if (isLoading) return <div>Loading side bar..</div>
     return <ul className="mail-side-bar">
         <Link to={`/mail/inbox`}>
-            <li>Inbox</li>
+            <li onClick={()=>setCurrFilter('inbox')}>Inbox</li>
         </Link>
         <Link to={`/mail/starred`}>
-            <li>Starred</li>
+            <li onClick={()=>setCurrFilter('starred')}>Starred</li>
         </Link>
         <Link to={`/mail/trash`}>
             <li>Trash</li>
