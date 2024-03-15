@@ -25,14 +25,17 @@ export const noteService = {
 }
 
 //functions
-function query() {
+function query(filterBy = getDefaultFilter()) {
   return storageService.query(NOTE_KEY).then((notes) => {
     if (!notes || !notes.length) {
       notes = demoNotesV2
       console.log('creating demo notes')
       storageService._save(NOTE_KEY, notes)
-      //showSuccessMsg('Creating demo notes')
     }
+    if (filterBy.txt) {
+      const regex = new RegExp(filterBy.txt, 'i')
+      notes = notes.filter(note => regex.test(note.info.title + note.info.txt))
+  }
     return notes
   })
 }
@@ -92,9 +95,7 @@ function getDefaultFilter() {
 function getFilterFromParams(searchParams = {}) {
   const defaultFilter = getDefaultFilter()
   return {
-    txt: searchParams.get('txt') || defaultFilter.txt,
-    // minSpeed: searchParams.get('minSpeed') || defaultFilter.minSpeed,
-    // desc: searchParams.get('desc') || defaultFilter.desc
+    txt: searchParams.get('txt') || defaultFilter.txt
   }
 }
 

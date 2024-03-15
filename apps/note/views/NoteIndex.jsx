@@ -5,6 +5,7 @@ const { Link, useSearchParams } = ReactRouterDOM
 
 import { NoteList } from '../cmps/NoteList.jsx'
 import { NoteEdit } from '../cmps/NoteEdit.jsx'
+import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { AddNewNote } from '../cmps/AddNewNote.jsx'
 
 import { noteService } from '../services/note.service.js'
@@ -17,6 +18,7 @@ export function NoteIndex() {
   //get Notes
   const [notes, setNotes] = useState(null)
   const [searchParams, setSearchParams] = useSearchParams()
+  const [filterBy, setFilterBy] = useState(noteService.getFilterFromParams(searchParams))
   const noteId = searchParams.get('id')
   const params = useParams()
 
@@ -31,8 +33,13 @@ export function NoteIndex() {
     updateNotes()
   }, [searchParams, noteId])
 
-  const updateNotes = () => {
-    noteService.query()
+  const onSetFilter = (fieldsToUpdate) => {
+    setFilterBy(prev => ({ ...prev, ...fieldsToUpdate }))
+    updateNotes(filterBy)
+}
+
+  const updateNotes = (filterBy) => {
+    noteService.query(filterBy)
     .then((data) => { 
       return noteService.splitByPin(data)
     })
@@ -90,7 +97,7 @@ export function NoteIndex() {
   if (!notes) return <div>Loading notes...</div>
   return (
     <React.Fragment>
-      {/* {!noteId &&<AddNewNote setNotes={setNotes}/>} */}
+      <NoteFilter filterBy={filterBy} onSetFilter={onSetFilter}/>
       <NoteEdit
         note={ getNoteById(noteId)}
         updateUrl={updateUrl}

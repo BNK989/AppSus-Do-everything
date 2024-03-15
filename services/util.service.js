@@ -7,6 +7,7 @@ export const utilService = {
     getDayName,
     getMonthName,
     formatTime,
+    debounce,
 }
 
 function makeId(length = 6) {
@@ -61,9 +62,6 @@ function getMonthName(date) {
     return monthNames[date.getMonth()]
 }
 
-
-
-
 function formatTime(timestamp) {
     const currentDate = new Date();
     const inputDate = new Date(timestamp);
@@ -86,3 +84,14 @@ function formatTime(timestamp) {
     const options = { day: '2-digit', month: 'long' };
     return inputDate.toLocaleDateString('en-US', options);
 }
+
+
+function debounce(fn, delay = 500) {
+    let timeoutId
+
+    return function(...args) {
+        clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => fn.apply(this, args), delay);
+    }
+}
+
