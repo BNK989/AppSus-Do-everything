@@ -4,6 +4,7 @@
 html, body {
     margin: 0;
     font-family: Roboto, Arial, sans-serif;
+    height: 100vh;
 }
 
 h1,
@@ -28,6 +29,8 @@ img {
 ul{
     list-style-type: none;
 }
+
+    
 
 *:focus-visible {
     outline: aliceblue;
