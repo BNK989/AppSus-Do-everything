@@ -9,7 +9,6 @@ export function MailPreview({ email,removeToTrash,setEmailDetail }) {
   useEffect(() => {
     prepareEmailToShow();
     setIsLoading(false);
-    //   console.log(email);
   }, []);
 
   function prepareEmailToShow() {
@@ -23,11 +22,6 @@ export function MailPreview({ email,removeToTrash,setEmailDetail }) {
 
   function handleCheckboxChange(event) {
     setIsChecked(!isChecked);
-
-    // console.log(email.isChecked);
-    // if (event.target.checked) {
-      // console.log(event.target.value);
-    // }
   }
 
   if (isLoading) return <div>Loading details..</div>;
@@ -47,14 +41,12 @@ export function MailPreview({ email,removeToTrash,setEmailDetail }) {
           />
           <input className="star" type="checkbox" title="bookmark"></input>
         </section>
-        {/* <Link to={`/mail/${email.folder}/${email.id}`}> */}
         <section className="email-preview-body" onClick={()=>setEmailDetail(email)}>
           <p>{convertedEmail.from}</p>
           <p>{convertedEmail.subject}</p>
           <p>{convertedEmail.body}</p>
           <p>{convertedEmail.sentAt}</p>
         </section>
-        {/* </Link> */}
         <section className="action-btn">
           <i className="fa-solid fa-trash" onClick={()=>removeToTrash(email.id,'trash')}></i>
           <i className="fa-solid fa-box-archive"></i>

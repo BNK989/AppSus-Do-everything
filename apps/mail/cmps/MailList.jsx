@@ -7,17 +7,13 @@ export function MailList(props) {
   const [emails, setEmails] = useState(null)
   const [emailDetail, setEmailDetail] = useState(null)
 
+  
+
   useEffect(() => {
     setEmails(props.emails)
     setIsLoading(false)
-    console.log(props.emails)
-  }, [])
+  }, [props.emails])
   
-  
-  useEffect(() => {
-    console.log(emailDetail)
-  }, [emailDetail])
-
   if (isLoading) return <div>Loading details..</div>;
   return (
     <div>
@@ -32,5 +28,3 @@ export function MailList(props) {
     </div>
   )
 }
-
-{/* <pre>{email.subject}</pre> */}

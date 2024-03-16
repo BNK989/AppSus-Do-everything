@@ -1,15 +1,12 @@
 const { useState, useEffect, Fragment } = React;
-const { useParams } = ReactRouter;
+
 
 
 export function MailDetails(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [email, setEmail] = useState(null);
 
-  const params = useParams();
-
   useEffect(() => {
-    
     setEmail(props.email)
     setIsLoading(false);
 
@@ -25,11 +22,4 @@ export function MailDetails(props) {
     </div>
   );
 }
-// id: 'e101',
-// subject: 'Miss you!',
-// body: 'Would love to catch up sometimes',
-// isRead: false,
-// sentAt : 1551133930594,
-// removedAt : null,
-// from: 'momo@momo.com',
-// to: 'user@appsus.com'
+
