@@ -5,9 +5,9 @@
 
   align-items: center;
   justify-content: space-between;
-  
-  font-size: .9em;
-  
+
+  font-size: 0.9em;
+
   padding: 0.5em;
   border: 1px solid #ccc;
   border-radius: 0.5em;
@@ -19,19 +19,24 @@
   .remove-btn {
     display: none;
   }
-  h3{
+  h3 {
     color: #757575;
-    padding: .2em .5em;
+    padding: 0.2em 0.5em;
     flex-grow: 1;
   }
-  p{
+  p {
     display: none;
+  }
+  span.placeholder {
+    color: #757575;
+    padding: 0.2em 0.5em;
+    position: absolute;
   }
 }
 
-.create-note-type{
+.create-note-type {
   font-size: 1.1em;
-  gap: .2em
+  gap: 0.2em;
 }
 
 .note-edit:hover {
@@ -41,7 +46,7 @@
 
 .note-edit.active {
   position: fixed;
-  flex-direction: column; 
+  flex-direction: column;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -49,21 +54,25 @@
   min-height: 40vh;
   z-index: 3;
 
-  h3{
+  h3 {
     min-width: 90%;
-    flex: 0
+    flex: 0;
+  }
+  span.placeholder {
+    align-self: start;
+    margin: 0 2.2em;
   }
   p,
   .action-btns,
   .remove-btn {
     display: block;
-  } 
-  p{
+  }
+  p {
     flex-grow: 1;
     display: block;
     min-width: 90%;
   }
-  .create-note-type{
+  .create-note-type {
     display: none;
   }
 }

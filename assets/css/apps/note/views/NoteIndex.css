@@ -23,6 +23,14 @@ section.note-index > * {
   break-inside: avoid;
 }
 
+h3.pinned-title{
+  color: #5f6368;
+  text-transform: uppercase;
+  font-size: .75em;
+  margin: 0 1em;
+
+}
+
 .note {
   position: relative;
   width: 100%;

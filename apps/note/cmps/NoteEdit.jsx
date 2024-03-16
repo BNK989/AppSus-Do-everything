@@ -22,23 +22,31 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
   const [isActive, setIsActive] = useState(!!note.id)
   const h3TitleRef = useRef()
   const pTextRef = useRef()
+  const placeholderRef = useRef()
 
   useEffect(() => {
     updateFields()
     if (note.id) setIsActive(true)
     //listToClick()
-  }, [note.id])
+  }, [note.id, isActive])
 
   const updateFields = () => {
     setNewNote(note.info)
     if(!note.id){
-        h3TitleRef.current.innerText = 'Take a note...'
+        h3TitleRef.current.innerText = ''
         pTextRef.current.innerText = ''
     } else {
-        h3TitleRef.current.innerText = note.info.title
+        h3TitleRef.current.innerText = note.info.title || ''
         if (pTextRef.current) pTextRef.current.innerText = note.info.txt
     }
   }
+
+  // const removeTitleForEmptyNote = () => {
+  //   if (h3TitleRef.current.innerText === 'Take a note...' && isActive) {
+  //     console.log('active:', isActive)
+  //     h3TitleRef.current.innerText = ''
+  //   }
+  // }
 
   const onChangeStyle = (newStyle) => {
     note.style = newStyle
@@ -61,6 +69,14 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
   const handleChange = ({ target }) => {
     const field = target.getAttribute('name')
     const value = target.innerText
+
+    if (h3TitleRef.current.innerText !== '') {
+      //hide span
+      placeholderRef.current.style.display = 'none'
+    }else{
+        //show span
+        placeholderRef.current.style.display = 'block'
+    }
 
     setNewNote((prev) => ({ ...prev, [field]: value }))
   }
@@ -104,24 +120,24 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
       }`}
       style={{ backgroundColor: note.style.backgroundColor }}
     >
-      <button
+      {/* <button
         className="remove-btn btn"
         onClick={(e) => {
           onClose(e)
         }}
       >
         <i className="fa-solid fa-xmark"></i>
-      </button>
+      </button> */}
       <h3
         ref={h3TitleRef}
         name="title"
         onInput={handleChange}
         contentEditable
-      ></h3>
+      ></h3><span ref={placeholderRef} className="placeholder">Take a note...</span>
       <div className="create-note-type flex">
-        <button onClick={()=>console.log('in dev')} className="btn create-note-type fa fa-check-box"></button>
-        <button onClick={()=>console.log('in dev')} className="btn create-note-type fa fa-paintbrush"></button>
-        <button onClick={()=>console.log('in dev')} className="btn create-note-type fa fa-image"></button>
+        <button onClick={()=>console.log('in dev')} title="Checkbox list" className="btn create-note-type fa fa-check-box"></button>
+        <button onClick={()=>console.log('in dev')} title="Paint" className="btn create-note-type fa fa-paintbrush"></button>
+        <button onClick={()=>console.log('in dev')} title="Add an image" className="btn create-note-type fa fa-image"></button>
       </div>
       {(note.info.txt || !note.id) && (
         <p ref={pTextRef} name="txt" onInput={handleChange} contentEditable={true}></p>

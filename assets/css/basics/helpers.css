@@ -42,48 +42,20 @@
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
-  /* 
-    &:hover {
-        background-color: var(--dark-base);
-        color: var(--light-base);
-    } */
-  /* 
-    &:active {
-        background-color: var(--darker-base);
-        color: var(--dark-base);
-    } */
+
 }
 .btn:hover {
-    opacity: 0.87;
-    background-color: rgba(95, 99, 104, 0.157);
-    color: #757575;
+  opacity: 0.87;
+  background-color: rgba(95, 99, 104, 0.157);
+  color: #757575;
 }
 
 .btn:active {
-    opacity: 0.87;
-    background-color: rgba(95, 99, 104, 0.157);
+  opacity: 0.87;
+  background-color: rgba(95, 99, 104, 0.157);
 }
 
-.action-btns {
-  z-index: 10;
 
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 0.5em;
-}
-
-.pin-btn {
-  /* display: none; */
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  background-color: transparent;
-}
-
-.note:hover .pin-btn {
-  display: block;
-}
-.inline{
+.inline {
   display: inline;
 }

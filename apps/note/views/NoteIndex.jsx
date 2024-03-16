@@ -105,7 +105,7 @@ export function NoteIndex() {
         onChangeStyle={onChangeStyle}
         togglePin={togglePin}
       />
-        <h3>Pinned</h3>
+        <h3 className="pinned-title">Pinned</h3>
       <section className="note-index pinned">
         {notes[0].map((note) => (
           <NoteList

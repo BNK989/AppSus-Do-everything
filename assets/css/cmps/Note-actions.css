@@ -1,0 +1,28 @@
+.action-btns {
+    z-index: 10;
+  
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 0.5em;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .note:hover .action-btns,
+  .active .action-btns {
+    opacity: 1;
+  }
+  
+  .pin-btn {
+    /* display: none; */
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: .9em;
+    background-color: transparent;
+  }
+  
+  .note:hover .pin-btn {
+    display: block;
+  }
