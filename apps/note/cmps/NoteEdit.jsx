@@ -72,10 +72,10 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
 
     if (h3TitleRef.current.innerText !== '') {
       //hide span
-      placeholderRef.current.style.display = 'none'
+      placeholderRef.current.classList.add('behidden')
     }else{
         //show span
-        placeholderRef.current.style.display = 'block'
+        placeholderRef.current.classList.remove('behidden')
     }
 
     setNewNote((prev) => ({ ...prev, [field]: value }))
@@ -83,19 +83,14 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
 
   const onSubmit = () => {
     setIsActive(false)
+    if(!newNote.title) return 
     note.info = newNote
     noteService
       .update(note.id, note)
       .then((noteData) => {
         return noteData
       })
-      .then((noteData) => {
-        if (Date.now() - 9000 < noteData.createdAt) {
-          updateUrl(noteData.id)
-        } else {
-          updateUrl('')
-        }
-      })
+      .then(()=> updateUrl(Math.floor(Math.random() * 99)))
       .then(showSuccessMsg('Note Updated'))
       .catch((err) => {
         console.log('error updating', err)
@@ -112,7 +107,7 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
   //console.log(newNote)
   return (
     <Fragment>
-        <div onClick={(e) => {setIsActive(false);onClose(e)}} className={`backdrop ${isActive ? 'active' : ''}`}></div>
+        <div onClick={(e) => {onSubmit();onClose(e)}} className={`backdrop ${isActive ? 'active' : ''}`}></div>
     <article
       onClick={() => setIsActive(true)}
       className={`note-edit flex ${note.isPinned ? 'pinned' : ''} ${

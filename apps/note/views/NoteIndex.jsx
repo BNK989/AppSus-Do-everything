@@ -59,7 +59,7 @@ export function NoteIndex() {
       .remove(id)
       .then((data) => {
         updateUrl('')
-        setNotes(data)
+        updateNotes()
         console.log(data)
         showSuccessMsg('Note removed')
       })
@@ -107,7 +107,7 @@ export function NoteIndex() {
       />
         <h3 className="pinned-title">Pinned</h3>
       <section className="note-index pinned">
-        {notes[0].map((note) => (
+        { notes[0].map((note) => (
           <NoteList
             key={note.id}
             note={note}
@@ -119,7 +119,7 @@ export function NoteIndex() {
         ))}
         </section>
         <section className="note-index unpinned">
-        {notes[1].map((note) => (
+        { notes[1].map((note) => (
           <NoteList
             key={note.id}
             note={note}
