@@ -4,6 +4,7 @@ import { utilService } from "../../../services/util.service.js";
 import { storageService } from "../../../services/async-storage.service.js";
 
 const MAIL_KEY = "mailDB";
+var gEmails;
 
 export const emailService = {
   createMail,
@@ -21,6 +22,7 @@ function removeToFolder(id,moveToFolder){
       if (email.id === id)email.folder = moveToFolder
     })
   })
+  console.log(id);
   return newList
 
 }
@@ -30,6 +32,7 @@ function initDev() {
 }
 
 function query(filterBy) {
+  if(gEmails) return gEmails
   console.log("filterBy", filterBy);
 
   return storageService.query(MAIL_KEY).then((emails) => {

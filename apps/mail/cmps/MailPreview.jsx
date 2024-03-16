@@ -23,9 +23,11 @@ export function MailPreview({ email,removeToTrash,setEmailDetail }) {
 
   function handleCheckboxChange(event) {
     setIsChecked(!isChecked);
-    if (event.target.checked) {
-      console.log(event.target.value);
-    }
+
+    // console.log(email.isChecked);
+    // if (event.target.checked) {
+      // console.log(event.target.value);
+    // }
   }
 
   if (isLoading) return <div>Loading details..</div>;
@@ -33,7 +35,7 @@ export function MailPreview({ email,removeToTrash,setEmailDetail }) {
     <Fragment>
       <div
         className={`mail-preview ${email.isRead ? "" : "bold"} 
-        ${email.isChecked ? " selected-email" : ""}`}>
+        ${isChecked? " selected-email" : ""}`}>
         <section className="tags">
           <input
           type="checkbox"

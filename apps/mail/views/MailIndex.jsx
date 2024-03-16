@@ -1,4 +1,4 @@
-const { useState, useEffect,Fragment } = React
+const { useState, useEffect,Fragment,useRef } = React
 const { Link, useSearchParams,Outlet } = ReactRouterDOM
 const { useParams } = ReactRouter;
 
@@ -7,6 +7,9 @@ import { utilService } from "../../../services/util.service.js"
 
 import {MailList} from "../cmps/MailList.jsx"
 import {MailSideBar} from "../cmps/MailSideBar.jsx"
+import {MailSearch} from "../cmps/MailSearch.jsx"
+import {MailCompose} from "../cmps/MailCompose.jsx"
+
 
 
 
@@ -15,7 +18,8 @@ import {MailSideBar} from "../cmps/MailSideBar.jsx"
 export function MailIndex() {
     const [emails, setEmails ]=useState(null)
     const [isLoading, setIsLoading] = useState(true)
-    const [currFilter, setCurrFilter] = useState('inbox')
+    // const [currFilter, setCurrFilter] = useState('inbox')
+    const currFilter = useRef(null)
     
 
     const params = useParams();
@@ -51,15 +55,22 @@ export function MailIndex() {
     function removeToTrash(id,folder){
         console.log(id);
         console.log(folder);
-        // var filteredList = emailService.removeToFolder(id,folder)
-        // setEmails(filteredList)
+        var filteredList = emailService.removeToFolder(id,folder)
+        setEmails(filteredList)
       }
     if (isLoading) return <div>Loading index..</div>
-    return <div className="main-container">
-        <MailSideBar setCurrFilter={setCurrFilter}/>
-        
+    return <Fragment>
+    <div className="main-container">
+        <MailCompose/>
+        <MailSearch/>
+        <div className="mail-side-bar">
+        <MailSideBar setCurrFilter={currFilter}/>
+
+            </div>        
         {/* {emailDetail&&<Outlet/>} */}
-        {!params.id&&<MailList emails={emails} removeToTrash={removeToTrash}/>}
+        {!params.id&&<div className="main-list"><MailList emails={emails} removeToTrash={removeToTrash}/></div>
+            }
         </div>
+    </Fragment> 
 }
 

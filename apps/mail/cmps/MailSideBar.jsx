@@ -2,7 +2,7 @@ const { useState, useEffect } = React;
 const { Link, useSearchParams } = ReactRouterDOM;
 const { useParams } = ReactRouter;
 
-export function MailSideBar({ setCurrFilter }) {
+export function MailSideBar({ setCurrFilter ,currFilter}) {
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
 
@@ -20,7 +20,8 @@ export function MailSideBar({ setCurrFilter }) {
         </li>
       </Link>
       <Link to={`/mail/starred`}>
-        <li onClick={() => setCurrFilter("starred")}>Starred</li>
+        {/* <li onClick={() => setCurrFilter("starred")}>Starred</li> */}
+        <li onClick={() => currFilter = "starred"}>Starred</li>
       </Link>
       <Link to={`/mail/trash`}>
         <li>Trash</li>

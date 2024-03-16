@@ -53,5 +53,5 @@ cursor: pointer;
     translate: 0% -30%;
 }
 .selected-email{
-    background-color: rgb(161, 177, 221);
+    background-color: #EBEFF8;
 }
