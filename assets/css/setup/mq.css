@@ -70,4 +70,7 @@
   margin: 10px;
   padding: 10px 30px;
  }
+ :root{
+  font-size: 13px;
+ }
 }
