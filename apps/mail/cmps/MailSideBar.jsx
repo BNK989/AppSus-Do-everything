@@ -15,16 +15,16 @@ export function MailSideBar({ setCurrFilter ,currFilter}) {
     <ul className="mail-side-bar">
       <Link to={`/mail/inbox`}>
         {/* <i className="fa-solid fa-trash inline"></i> */}
-        <li className="inline" onClick={() => setCurrFilter("inbox")}>
+        <li className="row-side-bar" onClick={() => setCurrFilter("inbox")}>
           Inbox
         </li>
       </Link>
       <Link to={`/mail/starred`}>
         {/* <li onClick={() => setCurrFilter("starred")}>Starred</li> */}
-        <li onClick={() => currFilter = "starred"}>Starred</li>
+        <li className="row-side-bar" onClick={() => currFilter = "starred"}>Starred</li>
       </Link>
       <Link to={`/mail/trash`}>
-        <li>Trash</li>
+        <li className="row-side-bar">Trash</li>
       </Link>
     </ul>
   );

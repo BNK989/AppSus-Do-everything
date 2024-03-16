@@ -9,9 +9,11 @@ export function MailCompose() {
   useEffect(() => {
     setIsLoading(false);
   }, []);
-
+  function newMail(){
+    console.log('new mail');
+  }
   if (isLoading) return <div>Loading side bar..</div>;
-  return <div><button className="compose-btn"><i class="fa-solid fa-pen"></i> Compose</button></div>
+  return <div><button onClick={newMail} className="compose-btn"><i class="fa-solid fa-pen"></i> Compose</button></div>
 
   
 }
