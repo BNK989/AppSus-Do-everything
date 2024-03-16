@@ -16,6 +16,7 @@ export function MailIndex() {
     const [emails, setEmails ]=useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [currFilter, setCurrFilter] = useState('inbox')
+    
 
     const params = useParams();
     // const [searchParams, setSearchParams] = useSearchParams(null)
@@ -46,17 +47,18 @@ export function MailIndex() {
             })
  
     }
+    
     function removeToTrash(id,folder){
-        // console.log(id);
-        // console.log(folder);
-        var filteredList = emailService.removeToFolder(id,folder)
-        setEmails(filteredList)
+        console.log(id);
+        console.log(folder);
+        // var filteredList = emailService.removeToFolder(id,folder)
+        // setEmails(filteredList)
       }
     if (isLoading) return <div>Loading index..</div>
     return <div className="main-container">
         <MailSideBar setCurrFilter={setCurrFilter}/>
         
-        {params.id&&<Outlet/>}
+        {/* {emailDetail&&<Outlet/>} */}
         {!params.id&&<MailList emails={emails} removeToTrash={removeToTrash}/>}
         </div>
 }

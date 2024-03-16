@@ -1,25 +1,34 @@
 const { useState, useEffect } = React;
 import { MailPreview } from "./MailPreview.jsx";
+import {MailDetails} from "./MailDetails.jsx"
 
 export function MailList(props) {
   const [isLoading, setIsLoading] = useState(true)
   const [emails, setEmails] = useState(null)
+  const [emailDetail, setEmailDetail] = useState(null)
 
   useEffect(() => {
     setEmails(props.emails)
     setIsLoading(false)
     console.log(props.emails)
   }, [])
+  
+  
+  useEffect(() => {
+    console.log(emailDetail)
+  }, [emailDetail])
 
   if (isLoading) return <div>Loading details..</div>;
   return (
     <div>
-      <ul className="preview-list">
+      {!emailDetail && <ul className="preview-list">
         {emails.map((email) => <li key={email.id}>
-            <MailPreview email={email} removeToTrash={props.removeToTrash}/>
+            <MailPreview email={email} removeToTrash={props.removeToTrash} setEmailDetail={setEmailDetail}/>
           </li>
         )}
-      </ul>
+      </ul>}
+      {emailDetail && <MailDetails email={emailDetail} folder={'inbox'}/>}
+      
     </div>
   )
 }

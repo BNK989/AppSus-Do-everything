@@ -16,7 +16,7 @@ export const emailService = {
 
 function removeToFolder(id,moveToFolder){
   console.log(id);
-  var newList =storageService.query(MAIL_KEY).then((emails)=>{
+  var newList = storageService.query(MAIL_KEY).then((emails)=>{
     emails.map((email)=>{
       if (email.id === id)email.folder = moveToFolder
     })

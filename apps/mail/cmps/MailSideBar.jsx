@@ -14,7 +14,7 @@ export function MailSideBar({ setCurrFilter }) {
   return (
     <ul className="mail-side-bar">
       <Link to={`/mail/inbox`}>
-        <i className="fa-solid fa-trash inline"></i>
+        {/* <i className="fa-solid fa-trash inline"></i> */}
         <li className="inline" onClick={() => setCurrFilter("inbox")}>
           Inbox
         </li>
