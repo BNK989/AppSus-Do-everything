@@ -22,18 +22,19 @@ export function NoteFilter({ filterBy, onSetFilter }){
     }
 
     return (
-        <div>
-            <h5>Search</h5>
+        <div className="search-box">
+
+			<i class="fa-solid fa-magnifying-glass"></i>
             <form onSubmit={onFilter}>
-			<label htmlFor="text">Text</label>
+			{/* <label htmlFor="text">Text</label> */}
 			<input type="search"
 				id="text"
 				name="txt"
 				value={filterByToEdit.txt}
 				onChange={handleChange}
-				placeholder="By text" />
-
-			<button>Filter</button>
+				placeholder="Search" />
+{/* 
+			<button>Filter</button> */}
 		</form>
         </div>
     )

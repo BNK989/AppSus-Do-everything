@@ -31,6 +31,7 @@
 @import './cmps/mail-side-bar.css';
 @import './cmps/NoteList.css';
 @import './cmps/Note-actions.css';
+@import './cmps/Note-filter.css';
 
 /* @import './apps/mail/cmps/MailList.css'; */
 

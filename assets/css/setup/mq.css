@@ -5,6 +5,9 @@
 }
 
 @media (width <= 700px) {
+  section.note-app{
+    grid-template-columns: minmax(0, 20px) minmax(340px, 1fr) minmax(0, 20px);
+  }
   .toggle-menu-btn {
     display: block;
   }

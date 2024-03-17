@@ -1,0 +1,37 @@
+.search-box  {
+    position: relative;
+    margin: 1em;
+    display: flex;
+
+    form{
+        width: 80%;
+        min-width: 360px;
+    }
+}
+.search-box input {
+    position: relative;
+    width: 100%;
+	display: flex;
+	align-items: center;
+	background-color: #f1f3f4;
+	height: 50px;
+	border: none;
+    border-radius: 5px;
+    padding: 0 10px;
+    padding-left: 3em;
+}
+
+.search-box i {
+    position: absolute;
+    width: fit-content;
+    z-index: 2;
+
+    margin: auto 1em;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    color: #999;
+}
+
+
+
