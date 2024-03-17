@@ -39,7 +39,7 @@ export function test(log){
 
 
 // Service Testing:
-//window.ebs = eventBusService
+window.ebs = eventBusService
 eventBusService.on('muk', (data)=>{
     console.log('Got Muk with data:', data)
 })

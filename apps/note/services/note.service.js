@@ -34,20 +34,26 @@ function query(filterBy = getDefaultFilter()) {
     }
     if (filterBy.txt) {
       const regex = new RegExp(filterBy.txt, 'i')
-      notes = notes.filter(note => regex.test(note.info.title + note.info.txt))
-  }
+      notes = notes.filter((note) =>
+        regex.test(note.info.title + note.info.txt)
+      )
+    }
     return notes
   })
 }
 
 function getNoteById(id) {
-  const foundNote = notes.flat().find((note) => note.id === id)
-  return foundNote || null
+  return query()
+    .then((notes) => {
+      console.log(44, notes)
+      const foundNote = notes.find((note) => note.id === id)
+      return foundNote || null
+    })
 }
 
-function splitByPin(notes){
-  const pinnedNotes = notes.filter(note => note.isPinned)
-  const otherNotes = notes.filter(note => !note.isPinned)
+function splitByPin(notes) {
+  const pinnedNotes = notes.filter((note) => note.isPinned)
+  const otherNotes = notes.filter((note) => !note.isPinned)
   return [pinnedNotes, otherNotes]
 }
 
@@ -95,7 +101,7 @@ function getDefaultFilter() {
 function getFilterFromParams(searchParams = {}) {
   const defaultFilter = getDefaultFilter()
   return {
-    txt: searchParams.get('txt') || defaultFilter.txt
+    txt: searchParams.get('txt') || defaultFilter.txt,
   }
 }
 

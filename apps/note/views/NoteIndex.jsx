@@ -18,32 +18,40 @@ export function NoteIndex() {
   //get Notes
   const [notes, setNotes] = useState(null)
   const [searchParams, setSearchParams] = useSearchParams()
-  const [filterBy, setFilterBy] = useState(noteService.getFilterFromParams(searchParams))
+  const [filterBy, setFilterBy] = useState(
+    noteService.getFilterFromParams(searchParams)
+  )
   const noteId = searchParams.get('id')
   const params = useParams()
 
   useEffect(() => {
-    const unsubscribe = eventBusService.on('pin-update', changedNoteId => {
+    const unsubscribe = eventBusService.on('pin-update', (changedNoteId) => {
       setTimeout(updateNotes, 999)
     })
+    eventBusService.on('updateStyleInIndex', (note) => {
+      console.log('msg received', note)
+      // TODO NEEDS WORK! 
+      onChangeStyle(note.id, note.style.backgroundColor)
+    })
     return unsubscribe
-  },[])
+  }, [])
 
   useEffect(() => {
     updateNotes()
   }, [searchParams, noteId])
 
   const onSetFilter = (fieldsToUpdate) => {
-    setFilterBy(prev => ({ ...prev, ...fieldsToUpdate }))
+    setFilterBy((prev) => ({ ...prev, ...fieldsToUpdate }))
     updateNotes(filterBy)
-}
+  }
 
   const updateNotes = (filterBy) => {
-    noteService.query(filterBy)
-    .then((data) => { 
-      return noteService.splitByPin(data)
-    })
-    .then((data) => setNotes(data))
+    noteService
+      .query(filterBy)
+      .then((data) => {
+        return noteService.splitByPin(data)
+      })
+      .then((data) => setNotes(data))
   }
 
   const updateUrl = (noteId) => {
@@ -70,17 +78,25 @@ export function NoteIndex() {
   }
 
   const onChangeStyle = (id, newStyle) => {
-    const note = noteService.getNoteById(id)
-    note.style = newStyle
-
-    noteService
-      .update(note.id, note)
-      .then(showSuccessMsg('Note color updated'))
-      .then(setBgColor(newStyle.backgroundColor))
-      .catch((err) => {
-        console.error('Could not update note', err)
-        showErrorMsg('Failed to update note')
+    console.log(82)
+    let note
+    noteService.getNoteById(id)
+      .then(data => {
+        note = data
+        console.log('note:', note)
+        note.style = newStyle
+        noteService
+          .update(note.id, note)
+          // TODO: THIS SHOULD RE_RENDER THE NOTE LIST SO THE COLOR OF THE NOTE WOULD UPDATE
+            .then(showSuccessMsg('Note color updated'))
+            .then(()=>setNotes(prev => [...prev, note]))
+          //.then(setBgColor(newStyle.backgroundColor))
+            .catch((err) => {
+            console.error('Could not update note', err)
+            showErrorMsg('Failed to update note')
+          })
       })
+
   }
 
   const togglePin = (id) => {
@@ -97,17 +113,17 @@ export function NoteIndex() {
   if (!notes) return <div>Loading notes...</div>
   return (
     <section className="note-app">
-      <NoteFilter filterBy={filterBy} onSetFilter={onSetFilter}/>
+      <NoteFilter filterBy={filterBy} onSetFilter={onSetFilter} />
       <NoteEdit
-        note={ getNoteById(noteId)}
+        note={getNoteById(noteId)}
         updateUrl={updateUrl}
         onDelete={onDelete}
         onChangeStyle={onChangeStyle}
         togglePin={togglePin}
       />
-        <h3 className="pinned-title">Pinned</h3>
+      <h3 className="pinned-title">Pinned</h3>
       <section className="note-index pinned">
-        { notes[0].map((note) => (
+        {notes[0].map((note) => (
           <NoteList
             key={note.id}
             note={note}
@@ -117,9 +133,9 @@ export function NoteIndex() {
             togglePin={togglePin}
           />
         ))}
-        </section>
-        <section className="note-index unpinned">
-        { notes[1].map((note) => (
+      </section>
+      <section className="note-index unpinned">
+        {notes[1].map((note) => (
           <NoteList
             key={note.id}
             note={note}

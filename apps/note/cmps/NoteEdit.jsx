@@ -9,6 +9,7 @@ import { NoteActions } from '../cmps/NoteActions.jsx'
 import {
   showErrorMsg,
   showSuccessMsg,
+  eventBusService
 } from '../../../services/event-bus.service.js'
 
 import { noteService } from '../services/note.service.js'
@@ -23,6 +24,7 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
   const h3TitleRef = useRef()
   const pTextRef = useRef()
   const placeholderRef = useRef()
+  const noteEditRef = useRef()
 
   useEffect(() => {
     updateFields()
@@ -54,6 +56,7 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
   const onChangeStyle = (newStyle) => {
     note.style = newStyle
     console.log(note.style)
+    setBgColor(newStyle.backgroundColor)
 
     if (note.id) {
       noteService
@@ -65,8 +68,9 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
           showErrorMsg('Failed to update note')
         })
     } else {
-      //setBgColor(note.style.backgroundColor)
+      noteEditRef.current.style.backgroundColor = newStyle.backgroundColor
     }
+    eventBusService.emit('updateStyleInIndex' , note)
   }
 
   const handleChange = ({ target }) => {
@@ -88,6 +92,7 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
     setIsActive(false)
     if(!newNote.title) return 
     note.info = newNote
+    // note.style = { backgroundColor: bgColor }
     noteService
       .update(note.id, note)
       .then((noteData) => {
@@ -112,11 +117,12 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
     <Fragment>
         <div onClick={(e) => {onSubmit();onClose(e)}} className={`backdrop ${isActive ? 'active' : ''}`}></div>
     <article
+      ref={noteEditRef}
       onClick={() => setIsActive(true)}
       className={`note-edit flex ${note.isPinned ? 'pinned' : ''} ${
         isActive ? 'active' : ''
       }`}
-      style={{ backgroundColor: note.style.backgroundColor }}
+      style={{ backgroundColor: note.style.backgroundColor || 'white' }}
     >
       {/* <button
         className="remove-btn btn"

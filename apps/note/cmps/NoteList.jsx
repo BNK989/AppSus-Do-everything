@@ -8,7 +8,7 @@ import { VidNote } from "../cmps/DynamicCmp/VidNote.jsx";
 
 import { NoteActions } from "./NoteActions.jsx";
 import { noteService } from '../services/note.service.js'
-import { showErrorMsg, showSuccessMsg, showUserMsg } from "../../../services/event-bus.service.js"
+import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 
 export function NoteList({note, updateUrl, setNotes, onDelete, togglePin}) {
 
