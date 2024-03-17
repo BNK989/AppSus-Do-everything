@@ -1,1 +1,62 @@
  /* home */
+
+ .home-page {
+    padding-block-start: 6em;
+  }
+  
+  .home-page img {
+    max-width: 150px;
+  }
+  
+  .home-page .main-title {
+    font-size: 2.5em;
+    text-shadow: 0px 3px 3px #3636365c;
+  }
+  
+  .home-page .btn-container {
+    justify-content: center;
+    gap: 1em;
+
+    margin: 4em 0;
+    width: 80%;
+  }
+  
+  .home-page .btn {
+ 
+    padding: 0.5em 1em;
+    border: 1px solid lightgray;
+    border-radius: 2em;
+  
+    font-size: 2em;
+  }
+  
+  .home-page .btn:hover {
+    scale: 1.05;
+    box-shadow: 0px 2px 7px #93939391;
+  }
+  
+  .home-page .btn::after,
+  .home-page .btn::before {
+    font-family: faRegular;
+    font-size: 1em;
+  }
+  
+  .home-page .btn.btn-mail {
+    background-color: var(--clr-blue1);
+  }
+  
+  .home-page .btn.btn-note {
+    background-color: var(--clr-yellow1);
+  }
+  
+  .home-page .btn.btn-mail::before {
+    margin-inline-end: 0.8em;
+    content: '\f01c';
+    font-family: fa-solid;
+  }
+  
+  .home-page .btn.btn-note::after {
+    margin-inline-start: 0.8em;
+    content: '\f328';
+    font-family: fa-reg;
+  }
