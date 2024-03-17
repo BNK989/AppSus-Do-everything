@@ -35,9 +35,12 @@ export function NoteEdit({ note, updateUrl, onDelete, togglePin }) {
     if(!note.id){
         h3TitleRef.current.innerText = ''
         pTextRef.current.innerText = ''
+        placeholderRef.current.classList.remove('behidden')
     } else {
         h3TitleRef.current.innerText = note.info.title || ''
+        placeholderRef.current.classList.add('behidden')
         if (pTextRef.current) pTextRef.current.innerText = note.info.txt
+        //
     }
   }
 

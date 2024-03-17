@@ -26,6 +26,7 @@
     padding: 0.5em 1em;
     border: 1px solid lightgray;
     border-radius: 2em;
+    text-transform: capitalize;
   
     font-size: 2em;
   }
