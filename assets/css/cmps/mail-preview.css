@@ -7,7 +7,7 @@
     border-bottom: 1px solid lightgrey;
 }
 .mail-preview:hover{
-    /* background-color: var(--base); */
+    background-color: #EBEFF8;
     box-shadow: -1px -2px 17px -2px var(--base);
 -webkit-box-shadow: -1px -2px 17px -2px var(--base);
 -moz-box-shadow: -1px -2px 17px -2px var(--base);
@@ -16,6 +16,7 @@ cursor: pointer;
 }
 .email-preview-body{
     display: inline-flex;
+    justify-content: space-around;
 }
 .tags{
     display: grid;
@@ -23,6 +24,7 @@ cursor: pointer;
     align-items: center;
     justify-content: center;
     width: max-content;
+    margin-inline-end: 20px;
 }
 .action-btn{
     display: flex;
@@ -53,5 +55,5 @@ cursor: pointer;
     translate: 0% -30%;
 }
 .selected-email{
-    background-color: rgb(161, 177, 221);
+    background-color: #EBEFF8;
 }

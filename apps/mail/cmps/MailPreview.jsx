@@ -1,7 +1,7 @@
 const { useState, useEffect, Fragment } = React;
 const { Link } = ReactRouterDOM;
 
-export function MailPreview({ email,removeToTrash }) {
+export function MailPreview({ email,removeToTrash,setEmailDetail }) {
   const [isLoading, setIsLoading] = useState(true);
   const [convertedEmail, setIEmail] = useState(null);
   const [isChecked, setIsChecked] = useState(email.isChecked);
@@ -9,7 +9,6 @@ export function MailPreview({ email,removeToTrash }) {
   useEffect(() => {
     prepareEmailToShow();
     setIsLoading(false);
-    //   console.log(email);
   }, []);
 
   function prepareEmailToShow() {
@@ -23,9 +22,6 @@ export function MailPreview({ email,removeToTrash }) {
 
   function handleCheckboxChange(event) {
     setIsChecked(!isChecked);
-    if (event.target.checked) {
-      console.log(event.target.value);
-    }
   }
 
   if (isLoading) return <div>Loading details..</div>;
@@ -33,7 +29,7 @@ export function MailPreview({ email,removeToTrash }) {
     <Fragment>
       <div
         className={`mail-preview ${email.isRead ? "" : "bold"} 
-        ${email.isChecked ? " selected-email" : ""}`}>
+        ${isChecked? " selected-email" : ""}`}>
         <section className="tags">
           <input
           type="checkbox"
@@ -45,14 +41,12 @@ export function MailPreview({ email,removeToTrash }) {
           />
           <input className="star" type="checkbox" title="bookmark"></input>
         </section>
-        <Link to={`/mail/${email.folder}/${email.id}`}>
-        <section className="email-preview-body">
+        <section className="email-preview-body" onClick={()=>setEmailDetail(email)}>
           <p>{convertedEmail.from}</p>
           <p>{convertedEmail.subject}</p>
           <p>{convertedEmail.body}</p>
           <p>{convertedEmail.sentAt}</p>
         </section>
-        </Link>
         <section className="action-btn">
           <i className="fa-solid fa-trash" onClick={()=>removeToTrash(email.id,'trash')}></i>
           <i className="fa-solid fa-box-archive"></i>

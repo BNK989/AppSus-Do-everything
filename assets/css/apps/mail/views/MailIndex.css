@@ -2,7 +2,34 @@
 
  .main-container{
     display: grid;
-    grid-template-columns: minmax(auto,15vw) 1fr;
+    grid-template-rows: 50px max-content;
+    grid-template-columns: minmax(max-content,15vw) 1fr;
     background-color: var(--light-base);
     height: 100vh;
+ }
+ .main-container > *{
+   margin-top: 10px;
+ }
+ .search-input{
+   height: 80%;
+   border-radius: 8px;
+   padding-inline-start: 15px;
+   background-color: #E3EBF4;
+   border: 0;
+ }
+ .compose-btn{
+   background-color: #C2E7FF;
+   border: 0;
+   padding: 15px;
+   margin-inline-start: 10px;
+   border-radius: 8px;
+   margin-right: 15px;
+  }
+  .compose-btn:hover{
+   background-color: hsl(204, 100%, 78%);
+   box-shadow: -1px -2px 17px -2px var(--base);
+   -webkit-box-shadow: -1px -2px 17px -2px var(--base);
+   -moz-box-shadow: -1px -2px 17px -2px var(--base);
+   cursor: pointer;
+
  }
